@@ -16,7 +16,17 @@ class MasterMind
       elsif guess.length != 4 || guess.split('').any? { |color| not COLORS.include?(color) }
         puts "Invalid guess, please enter a 4-letter code using the colors R, B, G, Y"
       else
-        puts take_turn(guess)
+        result = take_turn(guess)
+
+        if guess == @secret_code.join
+          puts "Congratulations! You've guessed the secret code: #{@secret_code.join}."
+          puts "Thanks for playing MasterMind!"
+          sleep(20)
+          system "clear" or system "cls" # Clear the screen for a cleaner output
+          initialize
+        else
+          puts result
+        end
       end
     end
   end
